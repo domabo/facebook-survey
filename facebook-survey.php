@@ -75,7 +75,6 @@ function checkLoginState() {
 
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
-  document.getElementById('loadingFB').style.display='none';
      if (response.status == 'connected') {
       // USER IS LOGGED IN AND HAS AUTHORIZED APP
       document.getElementById('registerFB').style.visibility='visible';
