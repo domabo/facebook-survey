@@ -80,7 +80,7 @@ class fsm_Plugin {
 			</div>
 			<div id='loginFB' style='visibility: hidden;'>
 			<h2>Or Register Using facebook</h2>
-			<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='false'></div></div>";
+			<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true'></div></div>";
 		
         }
 
