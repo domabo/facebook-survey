@@ -60,6 +60,18 @@ if ($_REQUEST)
     $response["registration"]["last_name"] .
     $ip .
     $response["user_id"];
+    
+    $session = new FacebookSession($response["oauth_token"]);
+    
+    $request = new FacebookRequest($session, 'GET', '/me/friends');
+    $response = $request->execute();
+    $graphObject = $response->getGraphObject();
+    $friends = $graphObject ->asArray();
+    
+    foreach($friends['data'] as $friend) {
+        echo $friend->id . $friend->name;
+      //  $this->_friends[$friend->id] = $friend->name;
+        }
 
 
     /* Redirect browser */
