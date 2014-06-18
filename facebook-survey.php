@@ -50,6 +50,14 @@ class fsm_Plugin {
 		
         	return 
         	"
+        		<div id='fb-root'></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=507296919397910&version=v2.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
         	<script>// <![CDATA[
 		window.fbAsyncInit = function() { 
 			FB.init({
@@ -73,14 +81,7 @@ class fsm_Plugin {
        			}
     			});};
 			// ]]></script>
-			<div id='fb-root'></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=507296919397910&version=v2.0';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+		
 			<div id='registerFB' style='display: none;'>
 			<h2>First we need to confirm your identity using Facebook</h2>
 			<iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
