@@ -40,34 +40,33 @@ if ($_REQUEST)
 {
     $response = parse_signed_request($_REQUEST['signed_request'],
         $FACEBOOK_SECRET);
-        
-        if ($response == null)
-        exit;
 
-$ip = getenv('HTTP_CLIENT_IP')?:
-getenv('HTTP_X_FORWARDED_FOR')?:
-getenv('HTTP_X_FORWARDED')?:
-getenv('HTTP_FORWARDED_FOR')?:
-getenv('HTTP_FORWARDED')?:
-getenv('REMOTE_ADDR');
+    if ($response == null)
+    {
+        echo 'invalid';
+        exit;
+    }
+
+    $ip = getenv('HTTP_CLIENT_IP')?:
+    getenv('HTTP_X_FORWARDED_FOR')?:
+    getenv('HTTP_X_FORWARDED')?:
+    getenv('HTTP_FORWARDED_FOR')?:
+    getenv('HTTP_FORWARDED')?:
+    getenv('REMOTE_ADDR');
 
     echo
-       $response["registration"]["email"] .
-       $response["registration"]["first_name"] .
-        $response["registration"]["last_name"] .
-         $ip .
-        $response["user_id"];
+    $response["registration"]["email"] .
+    $response["registration"]["first_name"] .
+    $response["registration"]["last_name"] .
+    $ip .
+    $response["user_id"];
 
-     
-/* Redirect browser */
+
+    /* Redirect browser */
 // header("Location: ". get_home_url(null, $_GET['success']));
- 
-/* Make sure that code below does not get executed when we redirect. */
-exit;
-    }else{
-        // An error ocurred, return error message   
-        echo '<html><head></head><body><b>Error:</b>&nbsp; ' . $api->errorMessage . '</body></html>';
-    }
+
+    /* Make sure that code below does not get executed when we redirect. */
+    exit;
 }
 else 
 {
