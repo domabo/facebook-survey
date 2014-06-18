@@ -68,7 +68,7 @@ var fbAsyncInit2 = function() {
 // This function is called on form load (after facebook initialized)
 // and also on callback from Login button if we were not logged in
 function checkLoginState() {
-   document.getElementById('registerFBframe').contentWindow.location.reload(true);
+   document.getElementById('registerFBframe').src = document.getElementById('registerFBframe').src;
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
