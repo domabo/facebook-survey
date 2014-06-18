@@ -95,15 +95,11 @@ function statusChangeCallback(response) {
 <div id='loginFB' style='display: none;'>
   <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
 </div>
-
-
-<div id='loadingFB' style='display: block;' class='spinner'></div>
-
 <div id='registerFB' style='visibility: hidden;'>
   <iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' 
   width='450' height='340'>
   </iframe>
-  <h6>Not you? &nbsp;&nbsp;<div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='small' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div></h6>
+  <h6>Not you? &nbsp;&nbsp;<div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='small' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></h6>
 </div>";
         }
 
