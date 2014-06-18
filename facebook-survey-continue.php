@@ -80,9 +80,9 @@ if ($_REQUEST)
     $ip .
     $response["user_id"];
     
-       FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
-  $session = new FacebookSession($response["oauth_token"]);
-      echo 'ok1';
+    FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
+     $session = new FacebookSession($response["oauth_token"]);
+      echo 'ok0';
       
       // To validate the session:
 try {
@@ -97,23 +97,12 @@ try {
       
      
       // Make a new request and execute it.
-try {
-    
-  echo 'ok2';
 
  $request = new FacebookRequest($session, 'GET', '/me/friends');
        echo 'ok3';
 
     $response = $request->execute();
       echo 'ok4';
-
-   
-} catch (FacebookRequestException $ex) {
-  echo $ex->getMessage();
-} catch (\Exception $ex) {
-  echo $ex->getMessage();
-}
-
 
     $graphObject = $response->getGraphObject();
       echo 'ok4';
