@@ -84,18 +84,6 @@ if ($_REQUEST)
      $session = new FacebookSession($response["oauth_token"]);
       echo 'ok0';
       
-      // To validate the session:
-try {
-  $session->validate();
-} catch (FacebookRequestException $ex) {
-  // Session not valid, Graph API returned an exception with the reason.
-  echo $ex->getMessage();
-} catch (\Exception $ex) {
-  // Graph API returned info, but it may mismatch the current app or have expired.
-  echo $ex->getMessage();
-}
-      
-     
       // Make a new request and execute it.
 
  $request = new FacebookRequest($session, 'GET', '/me/friends');
