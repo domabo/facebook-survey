@@ -59,33 +59,33 @@ class fsm_Plugin {
       				xfbml  : false  // parse XFBML
     				});
 			FB.getLoginStatus(function(o) { 
-       			if (o.status == 'connected') {
-          			// USER IS LOGGED IN AND HAS AUTHORIZED APP
-         			document.getElementById('registerFB').style.display='block';
-         			 document.getElementById('loginFB').style.display='block';
-       			} else if (o.status == 'not_authorized') {
-          			// USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
-          			document.getElementById('registerFB').style.display='block';
-          			document.getElementById('loginFB').style.display='block';
-       			} else {
-          			 document.getElementById('registerFB').style.display='none';
-          			 document.getElementById('loginFB').style.display='block';
-       			}
-    			});};
+       		 		if (o.status == 'connected') {
+          				// USER IS LOGGED IN AND HAS AUTHORIZED APP
+         				document.getElementById('registerFB').style.display='block';
+         			 	document.getElementById('loginFB').style.display='block';
+       				} else if (o.status == 'not_authorized') {
+          				// USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
+          				document.getElementById('registerFB').style.display='block';
+          				document.getElementById('loginFB').style.display='block';
+       				} else {
+          			 	document.getElementById('registerFB').style.display='none';
+          			 	document.getElementById('loginFB').style.display='block';
+       				}
+    			});
+    		};  //fbAsyncInit
     			
-    			// ]]></script>
-		
-		 
-			<div id='loginFB' style='display: block;'>
-			<h2>First we need you to confirm your identity using Facebook</h2>
-			<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true'></div></div>
+    		// ]]></script>
+	
+		<div id='loginFB' style='display: block;'>
+		<h2>First we need you to confirm your identity using Facebook</h2>
+		<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true'></div></div>
 
-			<div id='registerFB' style='display: none;'>
-			<h2>First we need to confirm your identity using Facebook</h2>
-			<iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
-			</iframe>
-			</div>
-			";
+		<div id='registerFB' style='display: none;'>
+		<h2>First we need to confirm your identity using Facebook</h2>
+		<iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
+		</iframe>
+		</div>
+		";
         }
 
 	public function fsm_plugin_settings_link( $links ) {
