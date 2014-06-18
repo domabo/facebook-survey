@@ -93,18 +93,13 @@ function statusChangeCallback(response) {
 // ]]></script>
 
 <div id='loginFB' style='display: none;'>
-  <h2>First we need to register your identify using Facebook.  Please login into facebook</h2>
   <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
-  <h6>We will not post to your timeline or record any details other than those needed to confirm your identity as a stakeholder in Williamson County</h6>
 </div>
 
 
 <div id='loadingFB' style='display: block;' class='spinner'></div>
 
-
-
 <div id='registerFB' style='display: none;'>
-  <h2>First we need to register your identity using Facebook.</h2>
   <iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
   </iframe>
 </div>
