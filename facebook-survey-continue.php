@@ -81,11 +81,20 @@ if ($_REQUEST)
     $response["user_id"];
     
     $session = new FacebookSession($response["oauth_token"]);
-    
+      echo 'ok1';
+
     $request = new FacebookRequest($session, 'GET', '/me/friends');
+      echo 'ok2';
+
     $response = $request->execute();
+      echo 'ok3';
+
     $graphObject = $response->getGraphObject();
+      echo 'ok4';
+
     $friends = $graphObject ->asArray();
+      echo 'ok5';
+
     
     echo 'ok';
     
