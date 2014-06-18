@@ -104,6 +104,7 @@ function statusChangeCallback(response) {
 // ]]></script>
 
 <div id='loginFB' style='display: none;'>
+ <h2>Please login/register with Facebook to continue"</h2>
   <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
 </div>
 <div id='registerFB' style='visibility: hidden;'>
