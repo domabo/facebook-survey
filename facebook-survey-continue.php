@@ -1,5 +1,5 @@
 <?php
-
+echo 'hello';
 # No need for the template engine
 define( 'WP_USE_THEMES', false );
 # Load WordPress Core
