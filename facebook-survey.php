@@ -62,11 +62,11 @@ class fsm_Plugin {
        			if (o.status == 'connected') {
           			// USER IS LOGGED IN AND HAS AUTHORIZED APP
          			document.getElementById('registerFB').style.display='block';
-         			 document.getElementById('loginFB').style.display='none';
+         			 document.getElementById('loginFB').style.display='block';
        			} else if (o.status == 'not_authorized') {
           			// USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
           			document.getElementById('registerFB').style.display='block';
-          			document.getElementById('loginFB').style.display='none';
+          			document.getElementById('loginFB').style.display='block';
        			} else {
           			 document.getElementById('registerFB').style.display='none';
           			 document.getElementById('loginFB').style.display='block';
