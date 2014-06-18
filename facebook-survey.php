@@ -75,6 +75,7 @@ function checkLoginState() {
 
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
+  document.getElementById('loadingFB').style.display='none';
      if (response.status == 'connected') {
       // USER IS LOGGED IN AND HAS AUTHORIZED APP
       document.getElementById('registerFB').style.display='block';
@@ -91,11 +92,16 @@ function statusChangeCallback(response) {
 
 // ]]></script>
 
-<div id='loginFB' style='display: block;'>
+<div id='loginFB' style='display: none;'>
   <h2>First we need to register your identify using Facebook.  Please login into facebook</h2>
   <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
   <h6>We will not post to your timeline or record any details other than those needed to confirm your identity as a stakeholder in Williamson County</h6>
 </div>
+
+
+<div id='loadingFB' style='display: block;' class="spinner"></div>
+
+
 
 <div id='registerFB' style='display: none;'>
   <h2>First we need to register your identity using Facebook.</h2>
