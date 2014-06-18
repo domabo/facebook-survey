@@ -40,6 +40,9 @@ if ($_REQUEST)
 {
     $response = parse_signed_request($_REQUEST['signed_request'],
         $FACEBOOK_SECRET);
+        
+        if ($response == null)
+        exit;
 
 $ip = getenv('HTTP_CLIENT_IP')?:
 getenv('HTTP_X_FORWARDED_FOR')?:
@@ -55,10 +58,9 @@ getenv('REMOTE_ADDR');
          $ip .
         $response["user_id"];
 
-     if($api->listSubscribe($MAILCHIMP_LIST_ID, $response["registration"]["email"], $merge_vars, 'html', false, true, false, true  )) {
-        // It worked!   
+     
 /* Redirect browser */
-header("Location: ". get_home_url(null, $_GET['success']));
+// header("Location: ". get_home_url(null, $_GET['success']));
  
 /* Make sure that code below does not get executed when we redirect. */
 exit;
