@@ -78,13 +78,16 @@ function statusChangeCallback(response) {
      if (response.status == 'connected') {
       // USER IS LOGGED IN AND HAS AUTHORIZED APP
       document.getElementById('registerFB').style.visibility='visible';
+      document.getElementById('registerFBLogout').style.display='block';
       document.getElementById('loginFB').style.display='none';
       } else if (response.status == 'not_authorized') {
       // USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
       document.getElementById('registerFB').style.visibility='visible';
+      document.getElementById('registerFBLogout').style.display='block';
       document.getElementById('loginFB').style.display='none';
       } else {
         document.getElementById('registerFB').style.visibility='hidden';
+      document.getElementById('registerFBLogout').style.display='none';
         document.getElementById('loginFB').style.display='block';
       }
   }
@@ -98,6 +101,8 @@ function statusChangeCallback(response) {
   <iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' 
   width='450' height='340'>
   </iframe>
+</div>
+<div id='registerFBLogout' style='display: none;'>
   <h6>Not you? &nbsp;&nbsp;
   <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='small' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
   </h6>
