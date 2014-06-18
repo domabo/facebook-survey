@@ -51,13 +51,6 @@ class fsm_Plugin {
         	return 
         	"<div id='fb-root'></div>
 <script>// <![CDATA[
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=" . get_option('FACEBOOK_APP_ID')."&version=v2.0';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
 
 		window.fbAsyncInit = function() { 
 			FB.init({
@@ -80,6 +73,15 @@ class fsm_Plugin {
           			 document.getElementById('loginFB').style.display='block';
        			}
     			});};
+    			
+    			(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=" . get_option('FACEBOOK_APP_ID')."&version=v2.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 			// ]]></script>
 		
 			<div id='registerFB' style='display: none;'>
