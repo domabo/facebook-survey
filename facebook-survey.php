@@ -48,55 +48,60 @@ class fsm_Plugin {
         'failure' => '/',
     ), $atts );
 		
-        	return 
-        	"<script>// <![CDATA[
-        	
-        	if (window.fbAsyncInit.hasRun === true) {
-            		setup(); // do something
-        	} else {
-            		var oldCB = window.fbAsyncInit;
-            		window.fbAsyncInit = function () {
-                		if (typeof oldCB === 'function') {
-                		    oldCB();
-                		}
-                		fbAsyncInit2(); // do something
-            			};
-        	}
+        	return "
+        <script>// <![CDATA[
 
-		var fbAsyncInit2 = function() { 
-		/*	FB.init({
-      				appId  : '" . get_option('FACEBOOK_APP_ID') . "',
-      				status : true, // check login status
-      				cookie : false, // enable cookies to allow the server to access the session
-      				xfbml  : false  // parse XFBML
-    				});*/
-			FB.getLoginStatus(function(o) { 
-       		 		if (o.status == 'connected') {
-          				// USER IS LOGGED IN AND HAS AUTHORIZED APP
-         				document.getElementById('registerFB').style.display='block';
-         			 	document.getElementById('loginFB').style.display='block';
-       				} else if (o.status == 'not_authorized') {
-          				// USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
-          				document.getElementById('registerFB').style.display='block';
-          				document.getElementById('loginFB').style.display='block';
-       				} else {
-          			 	document.getElementById('registerFB').style.display='none';
-          			 	document.getElementById('loginFB').style.display='block';
-       				}
-    			});
-    		};  //fbAsyncInit
-    			
-    		// ]]></script>
-	
-		<div id='loginFB' style='display: block;'>
-		<h2>First we need you to confirm your identity using Facebook</h2>
-		<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true'></div></div>
+if (window.fbAsyncInit.hasRun === true) {
+  fbAsyncInit2(); // do something
+} else {
+  var oldCB = window.fbAsyncInit;
+  window.fbAsyncInit = function () {
+    if (typeof oldCB === 'function') { oldCB(); }
+  fbAsyncInit2(); // do something
+  };
+}
 
-		<div id='registerFB' style='display: none;'>
-		<h2>First we need to confirm your identity using Facebook</h2>
-		<iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
-		</iframe>
-		</div>
+var fbAsyncInit2 = function() { 
+  checkLoginState();
+};  
+
+// This function is called on form load (after facebook initialized)
+// and also on callback from Login button if we were not logged in
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+     if (o.status == 'connected') {
+      // USER IS LOGGED IN AND HAS AUTHORIZED APP
+      document.getElementById('registerFB').style.display='block';
+      document.getElementById('loginFB').style.display='none';
+      } else if (o.status == 'not_authorized') {
+      // USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
+      document.getElementById('registerFB').style.display='block';
+      document.getElementById('loginFB').style.display='none';
+      } else {
+        document.getElementById('registerFB').style.display='none';
+        document.getElementById('loginFB').style.display='block';
+      }
+  }
+
+// ]]></script>
+
+<div id='loginFB' style='display: block;'>
+  <h2>First we need to register your identify using Facebook.  Please login into facebook</h2>
+  <div class='fb-login-button' scope='public_profile,email' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true' onlogin='checkLoginState();'></div>
+  <h6>We will not post to your timeline or record any details other than those needed to confirm your identity as a stakeholder in Williamson County</h6>
+</div>
+
+<div id='registerFB' style='display: none;'>
+  <h2>First we need to register your identity using Facebook.</h2>
+  <iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
+  </iframe>
+</div>
 		";
         }
 
