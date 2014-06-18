@@ -83,6 +83,11 @@ if ($_REQUEST)
     $session = new FacebookSession($response["oauth_token"]);
       echo 'ok1';
       
+      
+      $facebook = new Facebook(array(
+    'appId' => $FACEBOOK_APP_ID,
+    'secret' => $FACEBOOK_SECRET
+));
       // Make a new request and execute it.
 try {
  $request = new FacebookRequest($session, 'GET', '/me/friends');
