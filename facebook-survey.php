@@ -99,7 +99,7 @@ function statusChangeCallback(response) {
 </div>
 
 
-<div id='loadingFB' style='display: block;' class="spinner"></div>
+<div id='loadingFB' style='display: block;' class='spinner'></div>
 
 
 
