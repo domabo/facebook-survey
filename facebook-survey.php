@@ -50,14 +50,26 @@ class fsm_Plugin {
 		
         	return 
         	"<script>// <![CDATA[
+        	
+        	if (window.fbAsyncInit.hasRun === true) {
+            		setup(); // do something
+        	} else {
+            		var oldCB = window.fbAsyncInit;
+            		window.fbAsyncInit = function () {
+                		if (typeof oldCB === 'function') {
+                		    oldCB();
+                		}
+                		fbAsyncInit2(); // do something
+            			};
+        	}
 
-		window.fbAsyncInit = function() { 
-			FB.init({
+		var fbAsyncInit2 = function() { 
+		/*	FB.init({
       				appId  : '" . get_option('FACEBOOK_APP_ID') . "',
       				status : true, // check login status
       				cookie : false, // enable cookies to allow the server to access the session
       				xfbml  : false  // parse XFBML
-    				});
+    				});*/
 			FB.getLoginStatus(function(o) { 
        		 		if (o.status == 'connected') {
           				// USER IS LOGGED IN AND HAS AUTHORIZED APP
