@@ -84,17 +84,21 @@ if ($_REQUEST)
       echo 'ok1';
       
       
-      $facebook = new Facebook(array(
+     
+      // Make a new request and execute it.
+try {
+    
+     $facebook = new Facebook(array(
     'appId' => $FACEBOOK_APP_ID,
     'secret' => $FACEBOOK_SECRET
 ));
-      // Make a new request and execute it.
-try {
+  echo 'ok2';
+
  $request = new FacebookRequest($session, 'GET', '/me/friends');
-       echo 'ok2';
+       echo 'ok3';
 
     $response = $request->execute();
-      echo 'ok3';
+      echo 'ok4';
 
    
 } catch (FacebookRequestException $ex) {
