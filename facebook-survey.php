@@ -75,11 +75,11 @@ function checkLoginState() {
 
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
-     if (o.status == 'connected') {
+     if (response.status == 'connected') {
       // USER IS LOGGED IN AND HAS AUTHORIZED APP
       document.getElementById('registerFB').style.display='block';
       document.getElementById('loginFB').style.display='none';
-      } else if (o.status == 'not_authorized') {
+      } else if (response.status == 'not_authorized') {
       // USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
       document.getElementById('registerFB').style.display='block';
       document.getElementById('loginFB').style.display='none';
