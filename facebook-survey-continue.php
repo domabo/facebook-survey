@@ -80,18 +80,25 @@ if ($_REQUEST)
     $ip .
     $response["user_id"];
     
-    $session = new FacebookSession($response["oauth_token"]);
+       FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
+  $session = new FacebookSession($response["oauth_token"]);
       echo 'ok1';
       
+      // To validate the session:
+try {
+  $session->validate();
+} catch (FacebookRequestException $ex) {
+  // Session not valid, Graph API returned an exception with the reason.
+  echo $ex->getMessage();
+} catch (\Exception $ex) {
+  // Graph API returned info, but it may mismatch the current app or have expired.
+  echo $ex->getMessage();
+}
       
      
       // Make a new request and execute it.
 try {
     
-     $facebook = new Facebook(array(
-    'appId' => $FACEBOOK_APP_ID,
-    'secret' => $FACEBOOK_SECRET
-));
   echo 'ok2';
 
  $request = new FacebookRequest($session, 'GET', '/me/friends');
