@@ -85,7 +85,7 @@ if ($_REQUEST)
       echo 'ok0';
       
       // Make a new request and execute it.
-
+try{
  $request = new FacebookRequest($session, 'GET', '/me/friends');
        echo 'ok3';
 
@@ -97,6 +97,14 @@ if ($_REQUEST)
 
     $friends = $graphObject ->asArray();
       echo 'ok5';
+}
+      catch (FacebookRequestException $ex) {
+  // Session not valid, Graph API returned an exception with the reason.
+  echo $ex->getMessage();
+} catch (\Exception $ex) {
+  // Graph API returned info, but it may mismatch the current app or have expired.
+  echo $ex->getMessage();
+}
 
     
     echo 'ok';
