@@ -86,7 +86,7 @@ if ($_REQUEST)
       
       // Make a new request and execute it.
 try{
- $request = new FacebookRequest($session, 'GET', '/me/friends');
+ $request = new FacebookRequest($session, 'GET', '/me');
        echo 'ok3';
 
     $response = $request->execute();
