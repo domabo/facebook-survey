@@ -49,8 +49,7 @@ class fsm_Plugin {
     ), $atts );
 		
         	return 
-        	"
-        		<div id='fb-root'></div>
+        	"<div id='fb-root'></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -58,36 +57,8 @@ class fsm_Plugin {
   js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=507296919397910&version=v2.0';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-        	<script>// <![CDATA[
-		window.fbAsyncInit = function() { 
-			FB.init({
-      				appId  : '" . get_option('FACEBOOK_APP_ID') . "',
-      				status : true, // check login status
-      				cookie : false, // enable cookies to allow the server to access the session
-      				xfbml  : false  // parse XFBML
-    				});
-			FB.getLoginStatus(function(o) { 
-       			if (o.status == 'connected') {
-          			// USER IS LOGGED IN AND HAS AUTHORIZED APP
-         			document.getElementById('registerFB').style.display='block';
-         			 document.getElementById('loginFB').style.display='block';
-       			} else if (o.status == 'not_authorized') {
-          			// USER IS LOGGED IN TO FACEBOOK (BUT HASN'T AUTHORIZED YOUR APP YET)
-          			document.getElementById('registerFB').style.display='block';
-          			document.getElementById('loginFB').style.display='block';
-       			} else {
-          			 document.getElementById('registerFB').style.display='none';
-          			 document.getElementById('loginFB').style.display='block';
-       			}
-    			});};
-			// ]]></script>
-		
-			<div id='registerFB' style='display: none;'>
-			<h2>First we need to confirm your identity using Facebook</h2>
-			<iframe src='https://www.facebook.com/plugins/registration?client_id=" . get_option('FACEBOOK_APP_ID'). ">&amp;redirect_uri=". plugins_url( 'facebook-survey-continue.php',  __FILE__ ) . "?success=". $a['success']." &amp;fb_only=true&amp;fields=name,first_name,last_name,email' width='450' height='450'>
-			</iframe>
-			</div>
-			<div id='loginFB' style='display: none;'>
+        
+			<div id='loginFB' style='display: block;'>
 			<h2>First we need you to confirm your identity using Facebook</h2>
 			<div class='fb-login-button' data-max-rows='1' data-size='large' data-show-faces='false' data-auto-logout-link='true'></div></div>";
 		
