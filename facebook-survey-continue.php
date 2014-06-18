@@ -82,12 +82,22 @@ if ($_REQUEST)
     
     $session = new FacebookSession($response["oauth_token"]);
       echo 'ok1';
-
-    $request = new FacebookRequest($session, 'GET', '/me/friends');
-      echo 'ok2';
+      
+      // Make a new request and execute it.
+try {
+ $request = new FacebookRequest($session, 'GET', '/me/friends');
+       echo 'ok2';
 
     $response = $request->execute();
       echo 'ok3';
+
+   
+} catch (FacebookRequestException $ex) {
+  echo $ex->getMessage();
+} catch (\Exception $ex) {
+  echo $ex->getMessage();
+}
+
 
     $graphObject = $response->getGraphObject();
       echo 'ok4';
