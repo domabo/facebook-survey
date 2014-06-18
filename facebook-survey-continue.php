@@ -78,8 +78,7 @@ if ($_REQUEST)
     $response["registration"]["first_name"] .
     $response["registration"]["last_name"] .
     $ip .
-    $response["user_id"] .
-    $response["oauth_token"];
+    $response["user_id"];
     
     $session = new FacebookSession($response["oauth_token"]);
     
