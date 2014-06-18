@@ -68,6 +68,8 @@ if ($_REQUEST)
     $graphObject = $response->getGraphObject();
     $friends = $graphObject ->asArray();
     
+    echo 'ok';
+    
     foreach($friends['data'] as $friend) {
         echo $friend->id . $friend->name;
       //  $this->_friends[$friend->id] = $friend->name;
