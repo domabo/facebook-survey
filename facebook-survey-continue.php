@@ -83,7 +83,7 @@ if ($_REQUEST)
    
     FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
        echo 'ok1';
-   try{
+ 
        
       $oauth_token = $response["oauth_token"];
        
@@ -95,27 +95,16 @@ if ($_REQUEST)
    
       // Make a new request and execute it.
 
- $request = new FacebookRequest($session, 'GET', '/me');
-       echo 'ok3';
-
-    $response = $request->execute();
-      echo 'ok4';
-
-    $graphObject = $response->getGraphObject();
-      echo 'ok4';
-
-    $friends = $graphObject ->asArray();
-      echo 'ok5';
-}
-      catch (FacebookRequestException $ex) {
-  // Session not valid, Graph API returned an exception with the reason.
+ try {
+  $response = (new FacebookRequest($session, 'GET', '/me'))->execute();
+  $object = $response->getGraphObject();
+  echo $object->getProperty('name');
+} catch (FacebookRequestException $ex) {
   echo $ex->getMessage();
 } catch (\Exception $ex) {
-  // Graph API returned info, but it may mismatch the current app or have expired.
   echo $ex->getMessage();
 }
 
-    
     echo 'ok';
     
     foreach($friends['data'] as $friend) {
