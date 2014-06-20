@@ -32,7 +32,8 @@ class fsm_Plugin {
 	private function init() {
 		// Register the options with the settings API
 		add_action( 'admin_init', array( $this, 'fsm_register_settings' ) );
-
+	 	add_action( 'init', array( $this, 'fsm_init' ), 0 );
+	
 		// Add the menu page
 		add_action( 'admin_menu', array( $this, 'fsm_setup_admin' ) );
 
@@ -43,8 +44,14 @@ class fsm_Plugin {
 
 	}
 	
+	public function fsm_init(){
+             if(!session_id()) {
+		 session_start();
+             }
+         }
+
 	public function populate_name($value){
-            return "TEST";
+            return "TEST" . $_SESSION["fsm_first_name"];
          }
 	
 	//[facebook-survey]
