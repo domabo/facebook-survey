@@ -41,6 +41,8 @@ class fsm_Plugin {
         	add_shortcode( 'facebook-survey', array( $this,'fsm_shortcode_facebook_survey') );
         	
         	add_filter("gform_field_value_fsm_name",array( $this, "populate_name"));
+   		add_filter("gform_field_value_fsm_email",array( $this, "populate_email"));
+   		add_filter("gform_field_value_fsm_name",array( $this, "populate_fb_id"));
 
 	}
 	
@@ -51,7 +53,15 @@ class fsm_Plugin {
          }
 
 	public function populate_name($value){
-            return "TEST" . $_SESSION["fsm_first_name"];
+            return $_SESSION["fsm_first_name"] . " " . $_SESSION["fsm_last_name"];
+         }
+         
+         public function populate_email($value){
+            return $_SESSION["fsm_email"] ;
+         }
+
+  	public function populate_fb_id($value){
+            return $_SESSION["fb_id"] ;
          }
 	
 	//[facebook-survey]
