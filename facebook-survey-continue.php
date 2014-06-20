@@ -79,11 +79,14 @@ if ($_REQUEST)
     $response["registration"]["last_name"] .
     $ip .
     $response["user_id"];
-    
+       echo 'ok0';
+   
     FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
+       echo 'ok1';
+   
      $session = FacebookSession::newSessionFromSignedRequest($_REQUEST['signed_request']);
-      echo 'ok0';
-      
+         echo 'ok2';
+   
       // Make a new request and execute it.
 try{
  $request = new FacebookRequest($session, 'GET', '/me');
