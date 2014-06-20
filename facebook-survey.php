@@ -43,6 +43,8 @@ class fsm_Plugin {
         	add_shortcode( 'session-destroy', array( $this,'fsm_shortcode_session_destroy') );
         
         	add_filter("gform_field_value_fsm_name",array( $this, "populate_name"));
+   		add_filter("gform_field_value_fsm_firstname",array( $this, "populate_firstname"));
+   		add_filter("gform_field_value_fsm_lastname",array( $this, "populate_lastname"));
    		add_filter("gform_field_value_fsm_email",array( $this, "populate_email"));
    		add_filter("gform_field_value_fsm_userid",array( $this, "populate_userid"));
 		add_filter("gform_field_value_fsm_ip",array( $this, "populate_ip"));
@@ -58,6 +60,14 @@ class fsm_Plugin {
 	public function populate_name($value){
             return $_SESSION["fsm_first_name"] . " " . $_SESSION["fsm_last_name"];
          }
+         
+         	public function populate_firstname($value){
+            return $_SESSION["fsm_first_name"] ;
+         }
+       	public function populate_lastname($value){
+            return  $_SESSION["fsm_last_name"];
+         }
+       
          
          public function populate_email($value){
             return $_SESSION["fsm_email"] ;
