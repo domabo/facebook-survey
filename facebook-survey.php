@@ -42,7 +42,8 @@ class fsm_Plugin {
         	
         	add_filter("gform_field_value_fsm_name",array( $this, "populate_name"));
    		add_filter("gform_field_value_fsm_email",array( $this, "populate_email"));
-   		add_filter("gform_field_value_fsm_name",array( $this, "populate_fb_id"));
+   		add_filter("gform_field_value_fsm_userid",array( $this, "populate_userid"));
+		add_filter("gform_field_value_fsm_ip",array( $this, "populate_ip"));
 
 	}
 	
@@ -60,10 +61,14 @@ class fsm_Plugin {
             return $_SESSION["fsm_email"] ;
          }
 
-  	public function populate_fb_id($value){
-            return $_SESSION["fb_id"] ;
+  	public function populate_userid($value){
+            return $_SESSION["fsm_userid"] ;
          }
-	
+         
+        public function populate_ip($value){
+            return $_SESSION["fsm_ip"] ;
+         }
+       
 	//[facebook-survey]
 	public function fsm_shortcode_facebook_survey( $atts ){
 		
