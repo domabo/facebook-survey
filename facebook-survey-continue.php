@@ -80,6 +80,7 @@ if ($_REQUEST)
      $_SESSION["fsm_last_name"] = $response["registration"]["last_name"];
      $_SESSION["fsm_userid"] = $response["user_id"];
      $_SESSION["fsm_ip"] = $ip;
+     $_SESSION["fsm_source"] = "FSM";
        
     /*   
      
