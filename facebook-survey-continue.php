@@ -100,8 +100,10 @@ if ($_REQUEST)
   $object = $response->getGraphObject();
   echo $object->getProperty('name');
 } catch (FacebookRequestException $ex) {
+    echo 'error';
   echo $ex->getMessage();
 } catch (\Exception $ex) {
+    echo 'error';
   echo $ex->getMessage();
 }
 
