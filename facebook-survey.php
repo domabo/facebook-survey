@@ -38,7 +38,14 @@ class fsm_Plugin {
 
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),array( $this, 'fsm_plugin_settings_link') );
         	add_shortcode( 'facebook-survey', array( $this,'fsm_shortcode_facebook_survey') );
+        	
+        	add_filter("gform_field_value_fsm_name", "populate_name");
+
 	}
+	
+	function populate_date($value){
+            return $_SESSION["fsm_first_name"] . " " .  $_SESSION["fsm_last_name"]
+         }
 	
 	//[facebook-survey]
 	public function fsm_shortcode_facebook_survey( $atts ){
