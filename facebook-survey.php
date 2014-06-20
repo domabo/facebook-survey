@@ -41,6 +41,7 @@ class fsm_Plugin {
         	add_shortcode( 'facebook-survey', array( $this,'fsm_shortcode_facebook_survey') );
         	add_shortcode( 'session', array( $this,'fsm_shortcode_session') );
         	add_shortcode( 'session-destroy', array( $this,'fsm_shortcode_session_destroy') );
+        	add_shortcode( 'session-verify', array( $this,'fsm_shortcode_session_verify') );
         
         	add_filter("gform_field_value_fsm_name",array( $this, "populate_name"));
    		add_filter("gform_field_value_fsm_firstname",array( $this, "populate_firstname"));
@@ -98,6 +99,18 @@ class fsm_Plugin {
 		return "";
 	
 		}
+		
+	public function fsm_shortcode_session_verify( $atts ){
+		if ($_SESSION["fsm_source"]!="FSM")
+		{
+		session_destroy ();
+		return "<script>window.location='/'</script>";
+		}
+		else
+		return "";
+	
+		}
+     
        
 	//[facebook-survey]
        	public function fsm_shortcode_facebook_survey( $atts ){
