@@ -84,7 +84,13 @@ if ($_REQUEST)
     FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
        echo 'ok1';
    try{
-     $session = FacebookSession::newSessionFromSignedRequest($_REQUEST['signed_request']);
+       
+      $oauth_token = $response["oauth_token"];
+       
+       echo ' ' . $oauth_token . ' ' ;
+       
+       $session = new FacebookSession($oauth_token);
+       
          echo 'ok2';
    
       // Make a new request and execute it.
