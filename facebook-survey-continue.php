@@ -1,5 +1,4 @@
 <?php
-echo 'hello';
 # No need for the template engine
 define( 'WP_USE_THEMES', false );
 # Load WordPress Core
@@ -60,8 +59,7 @@ function base64_url_decode($input)
 
 if ($_REQUEST) 
 {
-    $response = parse_signed_request($_REQUEST['signed_request'],
-        $FACEBOOK_SECRET);
+    $response = parse_signed_request($_REQUEST['signed_request'], $FACEBOOK_SECRET);
 
     if ($response == null)
     {
@@ -76,29 +74,22 @@ if ($_REQUEST)
     getenv('HTTP_FORWARDED')?:
     getenv('REMOTE_ADDR');
 
-    echo
-    $response["registration"]["email"] .
-    $response["registration"]["first_name"] .
-    $response["registration"]["last_name"] .
-    $ip .
-    $response["user_id"];
-       echo 'ok0';
    
-    FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
-       echo 'ok1';
- 
+     $_SESSION["fsm_email"] = $response["registration"]["email"];
+     $_SESSION["fsm_first_name"] = $response["registration"]["first_name"];
+     $_SESSION["fsm_last_name"] = $response["registration"]["last_name"];
+     $_SESSION["fsm_user_id"] = $response["user_id"];
+     $_SESSION["fsm_ip"] = $ip
        
-      $oauth_token = $response["oauth_token"];
-       
-       echo ' ' . $oauth_token . ' ' ;
-       
-       $session = new FacebookSession($oauth_token);
-       
-         echo 'ok2';
-   
-      // Make a new request and execute it.
-
+    /*   
+     
  try {
+  FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
+   
+        $oauth_token = $response["oauth_token"];
+       
+        $session = new FacebookSession($oauth_token);
+   
   $response = (new FacebookRequest($session, 'GET', '/me'))->execute();
   $object = $response->getGraphObject();
   echo $object->getProperty('name');
@@ -109,17 +100,11 @@ if ($_REQUEST)
     echo 'error';
   echo $ex->getMessage();
 }
-
-    echo 'ok';
-    
-    foreach($friends['data'] as $friend) {
-        echo $friend->id . $friend->name;
-      //  $this->_friends[$friend->id] = $friend->name;
-        }
+*/
 
 
     /* Redirect browser */
-// header("Location: ". get_home_url(null, $_GET['success']));
+header("Location: ". get_home_url(null, $_GET['success']));
 
     /* Make sure that code below does not get executed when we redirect. */
     exit;
