@@ -40,6 +40,7 @@ class fsm_Plugin {
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),array( $this, 'fsm_plugin_settings_link') );
         	add_shortcode( 'facebook-survey', array( $this,'fsm_shortcode_facebook_survey') );
         	add_shortcode( 'session', array( $this,'fsm_shortcode_session') );
+        	add_shortcode( 'session-destroy', array( $this,'fsm_shortcode_session_destroy') );
         
         	add_filter("gform_field_value_fsm_name",array( $this, "populate_name"));
    		add_filter("gform_field_value_fsm_email",array( $this, "populate_email"));
@@ -79,6 +80,12 @@ class fsm_Plugin {
         'var' => 'fsm_userid'
     ), $atts );
 		return $_SESSION[$a['var']];
+	
+		}
+		
+	public function fsm_shortcode_session_destroy( $atts ){
+		session_destroy ();
+		return "";
 	
 		}
        
