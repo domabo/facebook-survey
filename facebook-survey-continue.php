@@ -102,7 +102,7 @@ if ($_REQUEST)
 }
 */
 
-
+echo  get_home_url(null, $_GET['success']);
     /* Redirect browser */
 header("Location: ". get_home_url(null, $_GET['success']));
 
