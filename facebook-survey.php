@@ -44,7 +44,7 @@ class fsm_Plugin {
 	}
 	
 	public function populate_name($value){
-            return $_SESSION["fsm_first_name"] . " " .  $_SESSION["fsm_last_name"];
+            return "TEST";
          }
 	
 	//[facebook-survey]
