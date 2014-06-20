@@ -43,7 +43,7 @@ class fsm_Plugin {
 
 	}
 	
-	function populate_name($value){
+	public function populate_name($value){
             return $_SESSION["fsm_first_name"] . " " .  $_SESSION["fsm_last_name"];
          }
 	
