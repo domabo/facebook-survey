@@ -79,7 +79,7 @@ if ($_REQUEST)
      $_SESSION["fsm_first_name"] = $response["registration"]["first_name"];
      $_SESSION["fsm_last_name"] = $response["registration"]["last_name"];
      $_SESSION["fsm_user_id"] = $response["user_id"];
-     $_SESSION["fsm_ip"] = $ip
+     $_SESSION["fsm_ip"] = $ip;
        
     /*   
      
