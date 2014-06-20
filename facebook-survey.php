@@ -44,7 +44,7 @@ class fsm_Plugin {
 	}
 	
 	function populate_date($value){
-            return $_SESSION["fsm_first_name"] . " " .  $_SESSION["fsm_last_name"]
+            return $_SESSION["fsm_first_name"] . " " .  $_SESSION["fsm_last_name"];
          }
 	
 	//[facebook-survey]
