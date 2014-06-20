@@ -44,7 +44,7 @@ class fsm_Plugin {
 	public function fsm_shortcode_facebook_survey( $atts ){
 		
 		 $a = shortcode_atts( array(
-        'success' => 'facebook-survey-success',
+        'success' => 'stakeholder-survey-detail',
         'failure' => '/',
     ), $atts );
 		
