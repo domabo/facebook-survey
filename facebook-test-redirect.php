@@ -40,9 +40,11 @@ try {
 // When Facebook returns an error
 	echo "ERROR";
 	print_r($ex);
+	header("Location: ". get_home_url());
 } catch(\Exception $ex) {
 	echo "ERROR";
 	print_r($ex);
+	header("Location: ". get_home_url());
 // When validation fails or other local issues
 }
 
