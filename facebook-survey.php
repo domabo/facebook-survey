@@ -158,7 +158,7 @@ public function fsm_shortcode_facebook_survey( $atts ){
   return "
   <div id='loginFB' style='display: block;'>
   <h2>Please sign in with Facebook to continue</h2>
-    <div><a href="' . $helper->getLoginUrl(array( 'email')) . '"><img href="images/facebook-login.png" alt="Sign in with Facebook"></a></div>
+    <div><a href='" . $helper->getLoginUrl(array("email")) . "'><img href='images/facebook-login.png' alt='Sign in with Facebook'></a></div>
   </div>";
 
 }
