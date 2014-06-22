@@ -75,7 +75,7 @@ if ($session) {
 	getenv('HTTP_FORWARDED')?:
 	getenv('REMOTE_ADDR');
 
-	$_SESSION["fsm_email"] = $user->getProperty(string "email", string $type = 'Facebook\GraphObject');
+	$_SESSION["fsm_email"] = $user->getProperty( "email",  $type = 'Facebook\GraphObject');
 	$_SESSION["fsm_first_name"] = $user->getFirstName();
 	$_SESSION["fsm_last_name"] = $user->getLastName();
 	$_SESSION["fsm_userid"] = $user->getId();
