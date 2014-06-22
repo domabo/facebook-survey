@@ -46,7 +46,7 @@ try {
 if ($session) {
 $me = (new FacebookRequest(
   $session, 'GET', '/me'
-))->execute()->getGraphObject(GraphUser::className();
+))->execute()->getGraphObject(GraphUser::className());
 print_r($me);
 }
 ?>
