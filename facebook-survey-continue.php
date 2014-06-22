@@ -30,6 +30,11 @@ use Facebook\GraphUser;
 $FACEBOOK_APP_ID = get_option('FACEBOOK_APP_ID');
 $FACEBOOK_SECRET = get_option('FACEBOOK_SECRET');
 
+if (!empty($_SESSION["failure"]))
+  $failure =  header("Location: ". get_home_url(null, $_SESSION["failure"]));
+else
+	$failure =  header("Location: ". get_home_url(null, "/"));
+
 FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
 $redirect_url = plugins_url( 'facebook-survey-continue.php',  __FILE__ );
 
@@ -40,11 +45,11 @@ try {
 // When Facebook returns an error
 	echo "ERROR";
 	print_r($ex);
-	header("Location: ". get_home_url());
+	header("Location: ". $failure );
 } catch(\Exception $ex) {
 	echo "ERROR";
 	print_r($ex);
-	header("Location: ". get_home_url());
+	header("Location: ". $failure );
 // When validation fails or other local issues
 }
 
@@ -89,6 +94,6 @@ if ($session) {
 }
 else 
 {
-     header("Location: ". get_home_url());
+     header("Location: ". $failure );
 }
 ?>
