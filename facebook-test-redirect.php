@@ -71,6 +71,8 @@ if ($session) {
 	$_SESSION["fsm_ip"] = $ip;
 	$_SESSION["fsm_source"] = "FSM";
 
+	echo "HELLO " . $user->email;
+
 	//header("Location: ". get_home_url(null, $_GET['success']));
 
 }
