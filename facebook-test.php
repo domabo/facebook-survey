@@ -31,7 +31,7 @@ $FACEBOOK_APP_ID = get_option('FACEBOOK_APP_ID');
 $FACEBOOK_SECRET = get_option('FACEBOOK_SECRET');
 
 FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
-$redirect_url = plugins_url( 'facebook-test-redirect.php',  __FILE__ );
+$redirect_url = plugins_url( 'facebook-test-redirect.php?success=http://www.google.com',  __FILE__ );
 
 $helper = new FacebookRedirectLoginHelper($redirect_url );
 echo '<a href="' . $helper->getLoginUrl(array( 'email', 'user_friends' )) . '">Connect with Facebook</a>';

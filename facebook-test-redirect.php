@@ -1,7 +1,5 @@
 <?php
-echo "HELLO WORLD";
-
- define( 'WP_USE_THEMES', false );
+define( 'WP_USE_THEMES', false );
 # Load WordPress Core
 // Assuming we're in a subdir: "~/wp-content/plugins/current_dir"
 require_once( '../../../wp-load.php' );
@@ -37,42 +35,47 @@ $redirect_url = plugins_url( 'facebook-test-redirect.php',  __FILE__ );
 
 $helper = new FacebookRedirectLoginHelper($redirect_url);
 try {
-    $session = $helper->getSessionFromRedirect();
+	$session = $helper->getSessionFromRedirect();
 } catch(FacebookRequestException $ex) {
-    // When Facebook returns an error
+// When Facebook returns an error
 } catch(\Exception $ex) {
-    // When validation fails or other local issues
+// When validation fails or other local issues
 }
+
 if ($session) {
 
- try {
+	try {
 
-   $user = (new FacebookRequest(
-  $session, 'GET', '/me'
-))->execute()->getGraphObject(GraphUser::className());
+		$user = (new FacebookRequest(
+			$session, 'GET', '/me'
+			))->execute()->getGraphObject(GraphUser::className());
 
-  } catch(FacebookRequestException $e) {
+	} catch(FacebookRequestException $e) {
 
-    echo "Exception occured, code: " . $e->getCode();
-    echo " with message: " . $e->getMessage();
+		echo "Exception occured, code: " . $e->getCode();
+		echo " with message: " . $e->getMessage();
 
-  }   
+	}   
 
-print_r($user);
+	$ip = getenv('HTTP_CLIENT_IP')?:
+	getenv('HTTP_X_FORWARDED_FOR')?:
+	getenv('HTTP_X_FORWARDED')?:
+	getenv('HTTP_FORWARDED_FOR')?:
+	getenv('HTTP_FORWARDED')?:
+	getenv('REMOTE_ADDR');
 
-  $ip = getenv('HTTP_CLIENT_IP')?:
-    getenv('HTTP_X_FORWARDED_FOR')?:
-    getenv('HTTP_X_FORWARDED')?:
-    getenv('HTTP_FORWARDED_FOR')?:
-    getenv('HTTP_FORWARDED')?:
-    getenv('REMOTE_ADDR');
-   
-     $_SESSION["fsm_email"] = $user->email;
-     $_SESSION["fsm_first_name"] = $user->first_name;
-     $_SESSION["fsm_last_name"] = $user->last_name;
-     $_SESSION["fsm_userid"] = $user->id;
-     $_SESSION["fsm_ip"] = $ip;
-     $_SESSION["fsm_source"] = "FSM";
+	$_SESSION["fsm_email"] = $user->email;
+	$_SESSION["fsm_first_name"] = $user->first_name;
+	$_SESSION["fsm_last_name"] = $user->last_name;
+	$_SESSION["fsm_userid"] = $user->id;
+	$_SESSION["fsm_ip"] = $ip;
+	$_SESSION["fsm_source"] = "FSM";
 
+	header("Location: ". get_home_url(null, $_GET['success']));
+
+}
+else 
+{
+	header("Location: ". get_home_url());
 }
 ?>
