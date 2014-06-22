@@ -50,22 +50,22 @@ if ($session) {
 
 	try {
 
-		$user = (new FacebookRequest(
-			$session, 'GET', '/me'
-			))->execute()->getGraphObject(GraphUser::className());
+		$request = new FacebookRequest($session,'GET','/me');
+		$response = $request->execute();
+		$user = $response->getGraphObject();
 
-		print_r($user);
-
-
-
-	} catch(FacebookRequestException $e) {
+	} 
+	catch(FacebookRequestException $e) 
+	{
 
 		echo "Exception occured, code: " . $e->getCode();
 		echo " with message: " . $e->getMessage();
 
-	}  catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
+	}  
+	catch (Exception $e) 
+	{
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+	}
 
 	$ip = getenv('HTTP_CLIENT_IP')?:
 	getenv('HTTP_X_FORWARDED_FOR')?:
@@ -83,11 +83,11 @@ if ($session) {
 
 	echo $_SESSION["success"];
 
-	//header("Location: ". get_home_url(null, $_GET['success']));
+//header("Location: ". get_home_url(null, $_GET['success']));
 
 }
 else 
 {
-	//header("Location: ". get_home_url());
+//header("Location: ". get_home_url());
 }
 ?>
