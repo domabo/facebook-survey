@@ -44,9 +44,26 @@ try {
     // When validation fails or other local issues
 }
 if ($session) {
-$me = (new FacebookRequest(
+$user = (new FacebookRequest(
   $session, 'GET', '/me'
 ))->execute()->getGraphObject(GraphUser::className());
-print_r($me);
+print_r($user);
+
+echo $user_profile->getLocation();
+
+  $ip = getenv('HTTP_CLIENT_IP')?:
+    getenv('HTTP_X_FORWARDED_FOR')?:
+    getenv('HTTP_X_FORWARDED')?:
+    getenv('HTTP_FORWARDED_FOR')?:
+    getenv('HTTP_FORWARDED')?:
+    getenv('REMOTE_ADDR');
+   
+     $_SESSION["fsm_email"] = $user->email;
+     $_SESSION["fsm_first_name"] = $user->first_name;
+     $_SESSION["fsm_last_name"] = $user->last_name;
+     $_SESSION["fsm_userid"] = $user->id;
+     $_SESSION["fsm_ip"] = $ip;
+     $_SESSION["fsm_source"] = "FSM";
+
 }
 ?>
