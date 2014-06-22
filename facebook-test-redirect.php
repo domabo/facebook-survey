@@ -52,10 +52,9 @@ if ($session) {
 
 		$request = new FacebookRequest($session,'GET','/me');
 		$response = $request->execute();
-		$user = $response->getGraphObject();
+		$user = $response->getGraphObject(GraphUser::className());
 
-		print_r($user);
-
+		echo $user->getName();
 	} 
 	catch(FacebookRequestException $e) 
 	{
@@ -76,14 +75,14 @@ if ($session) {
 	getenv('HTTP_FORWARDED')?:
 	getenv('REMOTE_ADDR');
 
-	$_SESSION["fsm_email"] = $user->email;
-	$_SESSION["fsm_first_name"] = $user->first_name;
-	$_SESSION["fsm_last_name"] = $user->last_name;
-	$_SESSION["fsm_userid"] = $user->id;
+	$_SESSION["fsm_email"] = $user->getProperty(string "email", string $type = 'Facebook\GraphObject');
+	$_SESSION["fsm_first_name"] = $user->getFirstName();
+	$_SESSION["fsm_last_name"] = $user->getLastName();
+	$_SESSION["fsm_userid"] = $user->getId();
 	$_SESSION["fsm_ip"] = $ip;
 	$_SESSION["fsm_source"] = "FSM";
 
-	echo $_SESSION["success"];
+	echo $_SESSION["success"] . $_SESSION["fsm_email"];
 
 //header("Location: ". get_home_url(null, $_GET['success']));
 
