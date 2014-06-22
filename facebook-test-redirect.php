@@ -63,7 +63,7 @@ if ($session) {
 		echo "Exception occured, code: " . $e->getCode();
 		echo " with message: " . $e->getMessage();
 
-	}  (Exception $e) {
+	}  catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
 
