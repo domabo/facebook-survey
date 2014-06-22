@@ -54,16 +54,18 @@ if ($session) {
 			$session, 'GET', '/me'
 			))->execute()->getGraphObject(GraphUser::className());
 
+		print_r($user);
 
-echo $user->first_name;
-	
+
 
 	} catch(FacebookRequestException $e) {
 
 		echo "Exception occured, code: " . $e->getCode();
 		echo " with message: " . $e->getMessage();
 
-	}   
+	}  (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 
 	$ip = getenv('HTTP_CLIENT_IP')?:
 	getenv('HTTP_X_FORWARDED_FOR')?:
