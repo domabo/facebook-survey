@@ -53,8 +53,6 @@ if ($session) {
 		$request = new FacebookRequest($session,'GET','/me');
 		$response = $request->execute();
 		$user = $response->getGraphObject(GraphUser::className());
-
-		echo $user->getName();
 	} 
 	catch(FacebookRequestException $e) 
 	{
@@ -84,11 +82,11 @@ if ($session) {
 
 	echo $_SESSION["success"] . $_SESSION["fsm_email"];
 
-//header("Location: ". get_home_url(null, $_GET['success']));
+    header("Location: ". get_home_url(null, $_SESSION["success"]));
 
 }
 else 
 {
-//header("Location: ". get_home_url());
+     header("Location: ". get_home_url());
 }
 ?>
