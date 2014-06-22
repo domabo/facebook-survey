@@ -1,5 +1,4 @@
 <?php
-# No need for the template engine
 define( 'WP_USE_THEMES', false );
 # Load WordPress Core
 // Assuming we're in a subdir: "~/wp-content/plugins/current_dir"
@@ -13,6 +12,7 @@ require_once( 'Facebook/FacebookSDKException.php' );
 require_once( 'Facebook/FacebookRequestException.php' );
 require_once( 'Facebook/FacebookAuthorizationException.php' );
 require_once( 'Facebook/GraphObject.php' );
+require_once( 'Facebook/GraphUser.php' );
 require_once( 'Facebook/HttpClients/FacebookCurl.php' );
 require_once( 'Facebook/HttpClients/FacebookHttpable.php' );
 require_once( 'Facebook/HttpClients/FacebookCurlHttpClient.php' );
@@ -25,93 +25,70 @@ use Facebook\FacebookSDKException;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookAuthorizationException;
 use Facebook\GraphObject;
+use Facebook\GraphUser;
 
 $FACEBOOK_APP_ID = get_option('FACEBOOK_APP_ID');
 $FACEBOOK_SECRET = get_option('FACEBOOK_SECRET');
 
-// No need to change the function body
-function parse_signed_request($signed_request, $secret) 
-{
-    list($encoded_sig, $payload) = explode('.', $signed_request, 2);
-// decode the data
-    $sig = base64_url_decode($encoded_sig);
-    $data = json_decode(base64_url_decode($payload), true);
-    if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
-    {
-        error_log('Unknown algorithm. Expected HMAC-SHA256');
-        return null;
-    }
+FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
+$redirect_url = plugins_url( 'facebook-survey-continue.php',  __FILE__ );
 
-// check sig
-    $expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
-    if ($sig !== $expected_sig) 
-    {
-        error_log('Bad Signed JSON signature!');
-        return null;
-    }
-    return $data;
+$helper = new FacebookRedirectLoginHelper($redirect_url);
+try {
+	$session = $helper->getSessionFromRedirect();
+} catch(FacebookRequestException $ex) {
+// When Facebook returns an error
+	echo "ERROR";
+	print_r($ex);
+	header("Location: ". get_home_url());
+} catch(\Exception $ex) {
+	echo "ERROR";
+	print_r($ex);
+	header("Location: ". get_home_url());
+// When validation fails or other local issues
 }
 
-function base64_url_decode($input) 
-{
-    return base64_decode(strtr($input, '-_', '+/'));
-}
+if ($session) {
 
-if ($_REQUEST) 
-{
-    $response = parse_signed_request($_REQUEST['signed_request'], $FACEBOOK_SECRET);
+	try {
 
-    if ($response == null)
-    {
-        echo 'invalid';
-        exit;
-    }
+		$request = new FacebookRequest($session,'GET','/me');
+		$response = $request->execute();
+		$user = $response->getGraphObject(GraphUser::className());
+	} 
+	catch(FacebookRequestException $e) 
+	{
 
-    $ip = getenv('HTTP_CLIENT_IP')?:
-    getenv('HTTP_X_FORWARDED_FOR')?:
-    getenv('HTTP_X_FORWARDED')?:
-    getenv('HTTP_FORWARDED_FOR')?:
-    getenv('HTTP_FORWARDED')?:
-    getenv('REMOTE_ADDR');
+		echo "Exception occured, code: " . $e->getCode();
+		echo " with message: " . $e->getMessage();
 
-   
-     $_SESSION["fsm_email"] = $response["registration"]["email"];
-     $_SESSION["fsm_first_name"] = $response["registration"]["first_name"];
-     $_SESSION["fsm_last_name"] = $response["registration"]["last_name"];
-     $_SESSION["fsm_userid"] = $response["user_id"];
-     $_SESSION["fsm_ip"] = $ip;
-     $_SESSION["fsm_source"] = "FSM";
-       
-    /*   
-     
- try {
-  FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
-   
-        $oauth_token = $response["oauth_token"];
-       
-        $session = new FacebookSession($oauth_token);
-   
-  $response = (new FacebookRequest($session, 'GET', '/me'))->execute();
-  $object = $response->getGraphObject();
-  echo $object->getProperty('name');
-} catch (FacebookRequestException $ex) {
-    echo 'error';
-  echo $ex->getMessage();
-} catch (\Exception $ex) {
-    echo 'error';
-  echo $ex->getMessage();
-}
-*/
+	}  
+	catch (Exception $e) 
+	{
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+	}
 
-echo  get_home_url(null, $_GET['success']);
-    /* Redirect browser */
-header("Location: ". get_home_url(null, $_GET['success']));
+	$ip = getenv('HTTP_CLIENT_IP')?:
+	getenv('HTTP_X_FORWARDED_FOR')?:
+	getenv('HTTP_X_FORWARDED')?:
+	getenv('HTTP_FORWARDED_FOR')?:
+	getenv('HTTP_FORWARDED')?:
+	getenv('REMOTE_ADDR');
 
-    /* Make sure that code below does not get executed when we redirect. */
-    exit;
+	$_SESSION["fsm_email"] = $user->getProperty( "email",  $type = 'Facebook\GraphObject');
+	$_SESSION["fsm_first_name"] = $user->getFirstName();
+	$_SESSION["fsm_last_name"] = $user->getLastName();
+	$_SESSION["fsm_userid"] = $user->getId();
+	$_SESSION["fsm_ip"] = $ip;
+	$_SESSION["fsm_source"] = "FSM";
+
+	echo $_SESSION["success"] . $_SESSION["fsm_email"];
+
+    header("Location: ". get_home_url(null, $_SESSION["success"]));
+
 }
 else 
 {
-    echo '$_REQUEST is empty';
+     header("Location: ". get_home_url());
 }
 ?>
