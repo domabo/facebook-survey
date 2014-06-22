@@ -54,6 +54,8 @@ if ($session) {
 			$session, 'GET', '/me'
 			))->execute()->getGraphObject(GraphUser::className());
 
+		print_r($user);
+
 echo "HELLO " . $user->first_name;
 	
 
