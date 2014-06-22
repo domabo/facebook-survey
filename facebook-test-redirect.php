@@ -1,4 +1,5 @@
 <?php
+echo "HELLO WORLD";
 
  define( 'WP_USE_THEMES', false );
 # Load WordPress Core
@@ -13,6 +14,7 @@ require_once( 'Facebook/FacebookSDKException.php' );
 require_once( 'Facebook/FacebookRequestException.php' );
 require_once( 'Facebook/FacebookAuthorizationException.php' );
 require_once( 'Facebook/GraphObject.php' );
+require_once( 'Facebook/GraphUser.php' );
 require_once( 'Facebook/HttpClients/FacebookCurl.php' );
 require_once( 'Facebook/HttpClients/FacebookHttpable.php' );
 require_once( 'Facebook/HttpClients/FacebookCurlHttpClient.php' );
@@ -25,7 +27,7 @@ use Facebook\FacebookSDKException;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookAuthorizationException;
 use Facebook\GraphObject;
-
+use Facebook\GraphUser;
 
 $FACEBOOK_APP_ID = get_option('FACEBOOK_APP_ID');
 $FACEBOOK_SECRET = get_option('FACEBOOK_SECRET');
@@ -44,8 +46,7 @@ try {
 if ($session) {
 $me = (new FacebookRequest(
   $session, 'GET', '/me'
-))->execute()->getGraphObject(GraphUser::className());
+))->execute()->getGraphObject(GraphUser::className();
 print_r($me);
-
 }
 ?>
