@@ -44,12 +44,21 @@ try {
     // When validation fails or other local issues
 }
 if ($session) {
-$user = (new FacebookRequest(
+
+ try {
+
+   $user = (new FacebookRequest(
   $session, 'GET', '/me'
 ))->execute()->getGraphObject(GraphUser::className());
 
+    echo "Name: " . $user->getName();
 
-echo $user_profile->getLocation();
+  } catch(FacebookRequestException $e) {
+
+    echo "Exception occured, code: " . $e->getCode();
+    echo " with message: " . $e->getMessage();
+
+  }   
 
 print_r($user);
 
