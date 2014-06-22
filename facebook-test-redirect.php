@@ -51,7 +51,7 @@ if ($session) {
   $session, 'GET', '/me'
 ))->execute()->getGraphObject(GraphUser::className());
 
-    echo "Name: " . $user->getName();
+    echo "Name: " . $user->getLocation();
 
   } catch(FacebookRequestException $e) {
 
