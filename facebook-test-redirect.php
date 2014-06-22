@@ -38,7 +38,11 @@ try {
 	$session = $helper->getSessionFromRedirect();
 } catch(FacebookRequestException $ex) {
 // When Facebook returns an error
+	echo "ERROR";
+	print_r($ex);
 } catch(\Exception $ex) {
+	echo "ERROR";
+	print_r($ex);
 // When validation fails or other local issues
 }
 
