@@ -9,19 +9,7 @@ Author URI: http://www.github.com/domabo
 License: GPLv2 or later
 */
 
-  require_once( 'Facebook/FacebookSession.php' );
-  require_once( 'Facebook/FacebookRedirectLoginHelper.php' );
-  require_once( 'Facebook/FacebookRequest.php' );
-  require_once( 'Facebook/FacebookResponse.php' );
-  require_once( 'Facebook/FacebookSDKException.php' );
-  require_once( 'Facebook/FacebookRequestException.php' );
-  require_once( 'Facebook/FacebookAuthorizationException.php' );
-  require_once( 'Facebook/GraphObject.php' );
-  require_once( 'Facebook/HttpClients/FacebookCurl.php' );
-  require_once( 'Facebook/HttpClients/FacebookHttpable.php' );
-  require_once( 'Facebook/HttpClients/FacebookCurlHttpClient.php' );
-
-  use Facebook\FacebookSession;
+   use Facebook\FacebookSession;
   use Facebook\FacebookRedirectLoginHelper;
   use Facebook\FacebookRequest;
   use Facebook\FacebookResponse;
@@ -136,9 +124,22 @@ public function fsm_shortcode_session_verify( $atts ){
 
 //[facebook-survey]
 public function fsm_shortcode_facebook_survey( $atts ){
-
-
-
+  
+  if (!class_exists("FacebookSession"))
+  {
+  require_once( 'Facebook/FacebookSession.php' );
+  require_once( 'Facebook/FacebookRedirectLoginHelper.php' );
+  require_once( 'Facebook/FacebookRequest.php' );
+  require_once( 'Facebook/FacebookResponse.php' );
+  require_once( 'Facebook/FacebookSDKException.php' );
+  require_once( 'Facebook/FacebookRequestException.php' );
+  require_once( 'Facebook/FacebookAuthorizationException.php' );
+  require_once( 'Facebook/GraphObject.php' );
+  require_once( 'Facebook/HttpClients/FacebookCurl.php' );
+  require_once( 'Facebook/HttpClients/FacebookHttpable.php' );
+  require_once( 'Facebook/HttpClients/FacebookCurlHttpClient.php' );
+  }
+ 
   $a = shortcode_atts( array(
     'success' => 'stakeholder-survey-detail',
     'failure' => '/'
