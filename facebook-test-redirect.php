@@ -47,9 +47,11 @@ if ($session) {
 $user = (new FacebookRequest(
   $session, 'GET', '/me'
 ))->execute()->getGraphObject(GraphUser::className());
-print_r($user);
+
 
 echo $user_profile->getLocation();
+
+print_r($user);
 
   $ip = getenv('HTTP_CLIENT_IP')?:
     getenv('HTTP_X_FORWARDED_FOR')?:
