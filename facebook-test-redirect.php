@@ -54,6 +54,8 @@ if ($session) {
 		$response = $request->execute();
 		$user = $response->getGraphObject();
 
+		print_r($user);
+
 	} 
 	catch(FacebookRequestException $e) 
 	{
