@@ -54,6 +54,9 @@ if ($session) {
 			$session, 'GET', '/me'
 			))->execute()->getGraphObject(GraphUser::className());
 
+echo "HELLO " . $user->first_name;
+	
+
 	} catch(FacebookRequestException $e) {
 
 		echo "Exception occured, code: " . $e->getCode();
@@ -75,7 +78,6 @@ if ($session) {
 	$_SESSION["fsm_ip"] = $ip;
 	$_SESSION["fsm_source"] = "FSM";
 
-	echo "HELLO " . $user->first_name;
 	echo $_SESSION["success"];
 
 	//header("Location: ". get_home_url(null, $_GET['success']));
