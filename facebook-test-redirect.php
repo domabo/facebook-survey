@@ -31,7 +31,7 @@ $FACEBOOK_APP_ID = get_option('FACEBOOK_APP_ID');
 $FACEBOOK_SECRET = get_option('FACEBOOK_SECRET');
 
 FacebookSession::setDefaultApplication($FACEBOOK_APP_ID, $FACEBOOK_SECRET);
-$redirect_url = plugins_url( 'facebook-test-redirect.php?success=http://www.google.com',  __FILE__ );
+$redirect_url = plugins_url( 'facebook-test-redirect.php',  __FILE__ );
 
 $helper = new FacebookRedirectLoginHelper($redirect_url);
 try {
@@ -76,6 +76,7 @@ if ($session) {
 	$_SESSION["fsm_source"] = "FSM";
 
 	echo "HELLO " . $user->email;
+	echo $_SESSION["success"];
 
 	//header("Location: ". get_home_url(null, $_GET['success']));
 
