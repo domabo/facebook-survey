@@ -71,11 +71,11 @@ if ($session) {
 	$_SESSION["fsm_ip"] = $ip;
 	$_SESSION["fsm_source"] = "FSM";
 
-	header("Location: ". get_home_url(null, $_GET['success']));
+	//header("Location: ". get_home_url(null, $_GET['success']));
 
 }
 else 
 {
-	header("Location: ". get_home_url());
+	//header("Location: ". get_home_url());
 }
 ?>
