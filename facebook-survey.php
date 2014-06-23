@@ -25,7 +25,7 @@ $ip = getenv('HTTP_CLIENT_IP')?:
     getenv('HTTP_FORWARDED')?:
     getenv('REMOTE_ADDR');
 
-if ($ip == "71.228.247.175")
+if ($ip == "71.228.247.175AAA")
 {
      @ini_set( 'log_errors', 'Off' );
 
